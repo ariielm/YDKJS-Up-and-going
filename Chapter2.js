@@ -148,5 +148,38 @@ foo(); // 5 7 9
 
 
 // ----- Conditionals ----- //
-
+var a = 42;
+var b = (a > 41) ? "hello" : "world";
+console.log(b); //hello
 // ----- Conditionals ----- //
+
+
+// ----- Strict mode ----- //
+function noStrict() {
+    noStrictVar = 1;
+    return noStrictVar;
+} //undefined
+noStrict(); // 1
+
+function strict() {
+    "use strict"; // turn on strict mode
+    //strictVar = 1; // `var` missing, ReferenceError
+    return strictVar;
+} //undefined
+strict(); // Uncaught ReferenceError
+// ----- Strict mode ----- //
+
+
+
+// ----- Functions as Values ----- //
+var foo = function() {
+    console.log('im here');
+}; // undefined
+foo(); //im here
+
+var x = function bar(){
+    console.log('im here too');
+}; // undefined
+x(); // im here too
+bar(); // Uncaught ReferenceError
+// ----- Functions as Values ----- //
