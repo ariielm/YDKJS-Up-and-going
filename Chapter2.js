@@ -63,4 +63,58 @@ typeof foo; //"function"
 typeof foo(); //"number"
 typeof foo.bar; //"string"
 
+
+//Boxing example: it converts the primitive string into a String object
+var a = "hello world";
+a.toUpperCase(); // "HELLO WORLD"
+
+
+//truthy - automatic coercion of a value to true
+if (true)
+if ({})
+if ([])
+if (42)
+if ("foo")
+if (new Date());
+
+//falsy - automatic coercion of a value to false
+if (false)
+if (null)
+if (undefined)
+if (0)
+if (NaN)
+if ('')
+if ("")
+if (document.all) [1];
+
+var a = "42"; //undefined
+var b = 42; //undefined
+a == b; // true
+a === b; // false
+
+
+var a = [1,2,3]; //undefined
+var b = [1,2,3]; //undefined
+var c = "1,2,3"; //undefined
+a == c; //true
+b == c; //true
+a == b; //false
+
+var a = 41; //undefined
+var b = "42"; //undefined
+var c = "43"; //undefined
+a < b; // true //number comparison
+b < c; // true //dictionarilly comparison
+
+var a = 42; //undefined
+var b = "foo"; //undefined
+a < b; // false //b is converted to NaN, then return false
+a > b; // false //b is converted to NaN, then return false
+a == b; // false
+
 // ----- Value types (not variable types) ----- //
+
+
+// ----- Variables ----- //
+
+// ----- Variables ----- //
