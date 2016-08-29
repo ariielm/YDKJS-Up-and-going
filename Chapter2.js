@@ -182,4 +182,58 @@ var x = function bar(){
 }; // undefined
 x(); // im here too
 bar(); // Uncaught ReferenceError
+
+//IIFE - Immediately invoked function expression
+(function IIFE(){
+    console.log( "Hello!" );
+})(); //Hello!
+
+//Closure
+function makeAdder(x) {
+    function add(y) {
+        return y + x;
+    };
+    return add;
+} // undefined
+var plusOne = makeAdder( 1 ); // undefined
+plusOne(3); // 4
+var plusTen = makeAdder( 10 ); // undefined
+plusTen(13); // 23
+
+//Modules pattern
+function User(){
+    var username, password;
+    function doLogin(user,pw) {
+        username = user;
+        password = pw;
+        console.log('Logging in the user: ' + user + ' with password: ' + password);
+    }
+    var publicAPI = {
+        login: doLogin
+    };
+    return publicAPI;
+} // undefined
+var fred = User(); // undefined
+fred.login( "fred", "12Battery34!" ); // Logging in the user: fred with password: 12Battery34!
 // ----- Functions as Values ----- //
+
+
+// ----- this Identifier ----- //
+//this always refer to an object!
+function foo() {
+    console.log( this.bar );
+}
+var bar = "global";
+var obj1 = {
+    bar: "obj1",
+    foo: foo
+};
+var obj2 = {
+    bar: "obj2"
+}; // undefined
+
+foo(); // global
+obj1.foo(); // obj1
+foo.call(obj2); //obj2
+new foo(); // undefined
+// ----- this Identifier ----- //
