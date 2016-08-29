@@ -219,7 +219,7 @@ fred.login( "fred", "12Battery34!" ); // Logging in the user: fred with password
 
 
 // ----- this Identifier ----- //
-//this always refer to an object!
+//this always refer to an object! The global scope object or the the outer scope object, like below:
 function foo() {
     console.log( this.bar );
 }
@@ -237,3 +237,61 @@ obj1.foo(); // obj1
 foo.call(obj2); //obj2
 new foo(); // undefined
 // ----- this Identifier ----- //
+
+
+// ----- Prototypes ----- //
+// It's like inheritance. When I create an object, it creates a prototype on it.
+// When I create the object with foo, it creates an object that inherits the foo object (it inherits with a prototype).
+var foo = {
+    a: 42
+}; // undefined
+var bar = Object.create(foo); // undefined
+bar; // Object {}
+//        __proto__: Object
+//          a: 42
+//          __proto__: Object
+bar.b = 'Hello World!'; // "Hello World!"
+bar.b; // "Hello World!"
+bar.a; // 42
+// ----- Prototypes ----- //
+
+
+// ----- Old & New ----- //
+// Polyfilling - a piece of code that simulates the new JS features (like functions) to run in older JS environments.
+// Not all the new features can be simulated by polyfilling. Example:
+if (!Number.isNaN) {
+    Number.isNaN = function isNaN(x) {
+        return x !== x;
+    };
+}
+// Polyfillers: https://github.com/es-shims/es5-shim    https://github.com/es-shims/es6-shim
+
+// Transpilling - a tool that converts your newer code into older code equivalents.
+// On the build process we insert the transpiler, like the minifying. It's always better to write code with the
+// new syntax. The code gets more human readable. Example:
+// In ES6:
+function foo(a = 2) {
+    console.log( a );
+} // undefined
+foo(); // 2
+foo( 42 ); // 42
+// Tranpilled becomes in:
+function foo() {
+    var a = arguments[0] !== (void 0) ? arguments[0] : 2;
+    console.log( a );
+} // undefined
+foo(); // 2
+foo( 42 ); // 42
+
+//Transpillers: https://babeljs.io/     https://github.com/google/traceur-compiler
+
+// ----- Old & New ----- //
+
+
+// ----- Non-JavaScript ----- //
+// I've only learned about the JS language. But on the real world, I'll use many things that are not on the JS.
+// Like the below example:
+var el = document.getElementByID( "foo" );
+// The document object is provided by the browser and is not specificated on the JS language. It's just a interface
+// that is implemented by each browser. The same happens with the alert function, that simulates windows.alert().
+// ----- Non-JavaScript ----- //
